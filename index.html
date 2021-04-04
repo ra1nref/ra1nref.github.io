@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Fetch json example</title>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <p>CD : <span id="cd">#########</span></p>
+    <p>Photobook : <span id="pb">#########</span></p>
+    <p>Total : <span id="total">#########</span></p>
+    <p><span id="datetime"></span></p>
+
+
+  </body>
+  <script>
+
+    var total = 0;
+    var cdAmount = 0;
+    var pbAmount = 0;
+//cd
+
+    function getCD() {
+
+    fetch('https://cors-anywhere.herokuapp.com/https://shopee.co.th/api/v4/product/get_purchase_quantities_for_selected_model?itemId=6080006359&modelId=90933079929&quantity=2&shopId=178191615')
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error("HTTP error, status = " + response.status);
+      }
+      return response.json();
+    })
+    .then(function(json) {
+        cdAmount = 200000 - parseInt(json.normal_stock)
+        document.getElementById('cd').innerHTML = cdAmount;
+getPB()    
+})
+    .catch(function(error) {
+    //   var p = document.createElement('p');
+    //   p.appendChild(
+    //     document.createTextNode('Error: ' + error.message)
+    //   );
+    //   document.body.insertBefore(p, myList);
+    });
+
+}
+
+    function getPB() {
+    //pb
+    fetch('https://cors-anywhere.herokuapp.com/https://shopee.co.th/api/v4/product/get_purchase_quantities_for_selected_model?itemId=8517970085&modelId=73803844907&quantity=2&shopId=178191615')
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error("HTTP error, status = " + response.status);
+      }
+      return response.json();
+    })
+    .then(function(json) {
+        pbAmount = 200000 - parseInt(json.normal_stock)
+        document.getElementById('pb').innerHTML = pbAmount;
+        document.getElementById('total').innerHTML = cdAmount + pbAmount;
+
+    })
+    .catch(function(error) {
+    //   var p = document.createElement('p');
+    //   p.appendChild(
+    //     document.createTextNode('Error: ' + error.message)
+    //   );
+    //   document.body.insertBefore(p, myList);
+    });
+}
+var dt = new Date();
+document.getElementById("datetime").innerHTML = dt.toLocaleDateString();
+getCD();
+
+
+
+  </script>
+</html>
