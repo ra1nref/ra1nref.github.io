@@ -31,7 +31,7 @@
 
     function getCD() {
 
-    fetch('https://cors-anywhere.herokuapp.com/https://shopee.co.th/api/v4/product/get_purchase_quantities_for_selected_model?itemId=6080006359&modelId=90933079929&quantity=2&shopId=178191615')
+    fetch('https://shopee.co.th/api/v4/product/get_purchase_quantities_for_selected_model?itemId=6080006359&modelId=90933079929&quantity=2&shopId=178191615')
     .then(function(response) {
       if (!response.ok) {
         throw new Error("HTTP error, status = " + response.status);
@@ -55,7 +55,7 @@ getPB()
 
     function getPB() {
     //pb
-    fetch('https://cors-anywhere.herokuapp.com/https://shopee.co.th/api/v4/product/get_purchase_quantities_for_selected_model?itemId=8517970085&modelId=73803844907&quantity=2&shopId=178191615')
+    fetch('https://shopee.co.th/api/v4/product/get_purchase_quantities_for_selected_model?itemId=8517970085&modelId=73803844907&quantity=2&shopId=178191615')
     .then(function(response) {
       if (!response.ok) {
         throw new Error("HTTP error, status = " + response.status);
